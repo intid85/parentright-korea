@@ -1,5 +1,6 @@
 # Builds the ParentRight Korea static site into ./site
 import os, textwrap
+from guides import GUIDES
 
 PREFIX = ""  # site is served from the domain root (Cloudflare Pages)
 BASE = "https://parentright.org"
@@ -37,6 +38,9 @@ h3{font-size:1.08rem;margin:22px 0 6px}
 .grid .card a{font-weight:600}
 ul{padding-left:22px}li{margin:4px 0}
 .small{font-size:.9rem;color:var(--muted)}
+figure{margin:20px 0}
+figure img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:12px;background:#fff}
+figcaption{font-size:.9rem;color:var(--muted);margin-top:6px}
 footer{border-top:1px solid var(--line);margin-top:48px;padding:24px 0 40px;font-size:.9rem;color:var(--muted)}
 footer a{margin-right:14px}
 """
@@ -62,14 +66,14 @@ def page(lang, path, title, desc, body, nav):
 </body></html>"""
 
 FOOTER = {
-"en": '<p><a href="/find-help.html">Find help</a><a href="/about.html">About &amp; privacy</a><a href="/philippines.html">Philippines</a><a href="/vietnam.html">Vietnam</a></p><p>ParentRight Korea is an independent information guide. It is not a law firm, does not give legal advice, does not refer cases to lawyers for a fee, and never publishes information about any individual.</p>',
+"en": '<p><a href="/find-help.html">Find help</a><a href="/guides/">Guides</a><a href="/about.html">About &amp; privacy</a><a href="/philippines.html">Philippines</a><a href="/vietnam.html">Vietnam</a></p><p>ParentRight Korea is an independent information guide. It is not a law firm, does not give legal advice, does not refer cases to lawyers for a fee, and never publishes information about any individual.</p>',
 "vi": '<p>ParentRight Korea là trang hướng dẫn thông tin độc lập. Chúng tôi không phải công ty luật, không tư vấn pháp lý, không giới thiệu luật sư để lấy phí và không bao giờ đăng thông tin về bất kỳ cá nhân nào.</p>',
 "tl": '<p>Ang ParentRight Korea ay isang independiyenteng gabay na pang-impormasyon. Hindi ito law firm, hindi nagbibigay ng legal na payo, hindi nagre-refer ng kaso sa abogado kapalit ng bayad, at hindi kailanman nagpo-post ng impormasyon tungkol sa sinumang tao.</p>',
 "ko": '<p>ParentRight Korea는 독립 정보 안내 사이트입니다. 법률사무소가 아니며 법률 자문을 하지 않고, 대가를 받고 변호사를 소개하지 않으며, 특정 개인에 관한 정보를 절대 게시하지 않습니다.</p>',
 }
 
 # ---------------- ENGLISH ----------------
-EN_NAV = [("/find-help.html", "Find help"), ("/#steps", "Steps"), ("/philippines.html", "Philippines"), ("/vietnam.html", "Vietnam"), ("/about.html", "About")]
+EN_NAV = [("/find-help.html", "Find help"), ("/#steps", "Steps"), ("/guides/", "Guides"),("/philippines.html", "Philippines"), ("/vietnam.html", "Vietnam"), ("/about.html", "About")]
 
 EN_HOME = """
 <section class="hero"><h1>Your child's father is Korean and he stopped supporting you. Here is the legal way forward.</h1>
@@ -486,7 +490,23 @@ PAGES = [
     ("ko", "/ko/", "ko/index.html", "한국인 아버지 인지청구·양육비 안내 | ParentRight Korea", "해외에서 한국인 아버지와 연락이 끊긴 아이를 위한 인지청구, 양육비 청구, 국적취득 절차와 무료 지원기관 안내.", KO_HOME, KO_NAV),
 ]
 
-os.makedirs("site/vi", exist_ok=True); os.makedirs("site/tl", exist_ok=True); os.makedirs("site/ko", exist_ok=True)
+def guide_body(g):
+    srcs = "".join(f'<li><a href="{u}" rel="noopener">{l}</a></li>' for l, u in g["sources"])
+    return (f'<section class="hero"><p class="small"><a href="/guides/">Guides</a> · {g["date"]}</p><h1>{g["title"]}</h1><p>{g["desc"]}</p></section>'
+            f'{g["body"]}'
+            f'<h2>Sources</h2><ul class="small">{srcs}</ul>'
+            f'<p class="small">Sources last checked {g["checked"]}. This page is general information, not legal advice. Laws change; confirm with legal aid or a lawyer before acting. Start with the <a href="/#steps">6 steps</a> or <a href="/find-help.html">find where to get help</a>.</p>'
+            '{{CORRECTIONS_EN}}')
+
+guides_sorted = sorted(GUIDES, key=lambda g: g["date"], reverse=True)
+GUIDES_INDEX = ('<section class="hero"><h1>Guides</h1><p>Short, sourced answers to the questions mothers ask most. New guides are added regularly.</p></section>'
+    + ("".join(f'<div class="card"><a href="/guides/{g["slug"]}.html"><strong>{g["title"]}</strong></a><p class="small" style="margin:6px 0 0">{g["date"]} · {g["desc"]}</p></div>' for g in guides_sorted)
+       or '<p>The first guide is coming soon.</p>'))
+PAGES.append(("en", "/guides/", "guides/index.html", "Guides | ParentRight Korea", "Sourced guides for mothers abroad on paternity, child support and nationality claims against a Korean father.", GUIDES_INDEX, EN_NAV))
+for g in guides_sorted:
+    PAGES.append(("en", f"/guides/{g['slug']}.html", f"guides/{g['slug']}.html", f"{g['title']} | ParentRight Korea", g["desc"], guide_body(g), EN_NAV))
+
+os.makedirs("site/vi", exist_ok=True); os.makedirs("site/tl", exist_ok=True); os.makedirs("site/ko", exist_ok=True); os.makedirs("site/guides", exist_ok=True)
 for lang, path, fn, title, desc, body, nav in PAGES:
     with open(f"site/{fn}", "w", encoding="utf-8") as f:
         body = body.replace('{{SUPPORT_EN}}', support_block('en')).replace('{{SUPPORT_VI}}', support_block('vi')).replace('{{SUPPORT_TL}}', support_block('tl')).replace('{{SUPPORT_KO}}', support_block('ko')).replace('{{CORRECTIONS_EN}}', corrections_block('en')).replace('{{CORRECTIONS_VI}}', corrections_block('vi')).replace('{{CORRECTIONS_TL}}', corrections_block('tl')).replace('{{CORRECTIONS_KO}}', corrections_block('ko')).replace('{{DONATION_PRIVACY}}', 'Donations are handled entirely by Ko-fi and PayPal; we never see card details.' if KOFI_URL else '')
