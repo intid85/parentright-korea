@@ -3,6 +3,7 @@ import os, textwrap
 
 PREFIX = "/parentright-korea"  # GitHub Pages subpath; set to "" when moving to a custom domain
 BASE = "https://intid85.github.io" + PREFIX
+KOFI_URL = ""  # e.g. "https://ko-fi.com/yourname" - support buttons appear only when set
 UPDATED = {"en": "Last reviewed: November 2026", "vi": "Cập nhật lần cuối: tháng 11/2026", "ko": "최종 검토: 2026년 11월"}
 
 CSS = """
@@ -115,9 +116,11 @@ EN_HOME = """
 <div class="card"><a href="https://www.liveinkorea.kr" rel="noopener">Danuri Helpline 1577-1366</a><p class="small">24/7, 13 languages including English, Tagalog and Vietnamese. For migrants and multicultural families in Korea; free lawyer consultations by appointment.</p></div>
 <div class="card"><a href="https://www.childsupport.or.kr" rel="noopener">Child Support Enforcement Agency</a><p class="small">Korean government agency, 1644-6621. Helps collect unpaid child support and apply sanctions.</p></div>
 <div class="card"><a href="https://www.scourt.go.kr" rel="noopener">Korean courts: litigation aid</a><p class="small">If you cannot afford court costs, you can ask the court to defer fees (소송구조).</p></div>
+<div class="card"><strong>Certified document translation</strong><p class="small">Coming soon. Korean courts need translations of birth certificates and other papers. We are preparing a trusted translation partner.</p></div>
 </div>
 <p>Country guides: <a href="/philippines.html">Philippines</a> · <a href="/vietnam.html">Vietnam</a></p>
 
+{{SUPPORT_EN}}
 <h2>Protect yourself</h2>
 <ul><li>Never pay a "father finder" in advance. Real NGOs and legal aid do not ask for big upfront fees.</li>
 <li>Do not send your child's documents to people you only know online.</li>
@@ -173,7 +176,8 @@ EN_ABOUT = """
 <li>We do not accept posts, comments or uploads.</li>
 <li>We do not give legal advice and are not a law firm.</li>
 <li>We do not refer cases to lawyers for money.</li></ul>
-<h2>Privacy</h2><p>This site has no accounts and does not collect personal data. The "Find help" questions run only inside your browser; answers are never sent or stored. If analytics or ads are added later, this page will be updated first.</p>
+{{SUPPORT_EN}}
+<h2>Privacy</h2><p>This site has no accounts and does not collect personal data. {{DONATION_PRIVACY}} The "Find help" questions run only inside your browser; answers are never sent or stored. If analytics or ads are added later, this page will be updated first.</p>
 <h2>Corrections</h2><p>If something is wrong or out of date, please tell us at <a href="mailto:contact@parentright.example">contact@parentright.example</a>. Please do not send us personal information about anyone.</p>
 """
 
@@ -330,6 +334,7 @@ VI_HOME = """
 <li>Không gửi giấy tờ của con cho người chỉ quen trên mạng.</li>
 <li>Nếu bị đe dọa, hãy báo công an và giữ lại tin nhắn.</li></ul>
 
+{{SUPPORT_VI}}
 <h2 id="gioi-thieu">Giới thiệu và quyền riêng tư</h2>
 <p>Chúng tôi chỉ giải thích các con đường pháp lý chính thức. Chúng tôi không bao giờ đăng tên, ảnh hay thông tin của bất kỳ ai, không nhận bài đăng hay bình luận, không tư vấn pháp lý và không giới thiệu luật sư để lấy tiền. Trang này không thu thập dữ liệu cá nhân.</p>
 <p class="small">Đây là thông tin chung, không phải tư vấn pháp lý. Luật có thể thay đổi; hãy xác nhận với trợ giúp pháp lý hoặc luật sư.</p>
@@ -365,8 +370,10 @@ KO_HOME = """
 <li>다누리콜센터 1577-1366: 24시간 13개 언어, 변호사 상담 예약 가능</li>
 <li>양육비이행관리원 1644-6621</li>
 <li>법원 소송구조: 소송비용 납입 유예</li>
+<li>서류 번역(출생증명서 등): 제휴 번역 서비스 준비 중</li>
 <li>필리핀: We Love Kopino(WLK), Kopino Children Association, 주필리핀 대사관 영사과</li></ul>
 
+{{SUPPORT_KO}}
 <h2 id="about">운영 원칙</h2>
 <ul><li>특정 개인의 이름·사진·연락처 등 어떤 정보도 게시하지 않습니다.</li>
 <li>게시판·댓글·업로드 기능이 없습니다.</li>
@@ -374,6 +381,18 @@ KO_HOME = """
 <li>개인정보를 수집하지 않습니다.</li></ul>
 <p class="small">일반 정보이며 법률 자문이 아닙니다. 법령은 바뀔 수 있으니 실행 전 법률구조공단이나 변호사에게 확인하세요. 근거 법령: <a href="https://www.law.go.kr" rel="noopener">국가법령정보센터</a></p>
 """
+
+
+def support_block(lang):
+    if not KOFI_URL:
+        return ""
+    t = {
+      "en": ("Support this free guide", "ParentRight Korea is independent and free. Donations keep the guide translated and up to date. Supporters do not get any legal service or priority, and donating is never required to use this site.", "Support on Ko-fi"),
+      "vi": ("Ủng hộ trang hướng dẫn miễn phí này", "Trang này độc lập và miễn phí. Tiền ủng hộ giúp duy trì bản dịch và cập nhật thông tin. Bạn không cần ủng hộ để sử dụng trang.", "Ủng hộ qua Ko-fi"),
+      "ko": ("이 무료 안내를 후원해 주세요", "ParentRight Korea는 독립적으로 운영되는 무료 사이트입니다. 후원금은 번역과 정보 업데이트에 쓰이며, 후원과 관계없이 누구나 모든 내용을 이용할 수 있습니다.", "Ko-fi로 후원하기"),
+    }[lang]
+    return (f'<h2>{t[0]}</h2><div class="card"><p>{t[1]}</p>'
+            f'<p><a href="{KOFI_URL}" rel="noopener" target="_blank" style="display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:10px;text-decoration:none;font-weight:600">{t[2]} ☕</a></p></div>')
 
 PAGES = [
     ("en", "/", "index.html", "Find Your Child's Korean Father Legally | ParentRight Korea", "How mothers abroad can prove paternity in a Korean court, claim child support from a Korean father, and secure Korean nationality for their child. Free help listed.", EN_HOME, EN_NAV),
@@ -388,6 +407,7 @@ PAGES = [
 os.makedirs("site/vi", exist_ok=True); os.makedirs("site/ko", exist_ok=True)
 for lang, path, fn, title, desc, body, nav in PAGES:
     with open(f"site/{fn}", "w", encoding="utf-8") as f:
+        body = body.replace('{{SUPPORT_EN}}', support_block('en')).replace('{{SUPPORT_VI}}', support_block('vi')).replace('{{SUPPORT_KO}}', support_block('ko')).replace('{{DONATION_PRIVACY}}', 'Donations are handled entirely by Ko-fi and PayPal; we never see card details.' if KOFI_URL else '')
         html = page(lang, path, title, desc, body, nav).replace('href="/', f'href="{PREFIX}/')
         f.write(html)
 
