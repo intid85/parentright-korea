@@ -2,7 +2,8 @@
 
 해외(필리핀·베트남 등)에 사는 엄마가 아이의 한국인 아버지에게 **인지(친자 인정)·양육비·국적**을 합법적으로 청구할 수 있도록 공식 절차와 지원기관을 안내하는 정보 사이트.
 
-- 사이트: https://intid85.github.io/parentright-korea/ (도메인 구매 후 이전 예정)
+- 사이트: https://parentright.org (Cloudflare Pages 프로젝트 `parentright-korea`, main 푸시 시 자동 배포. 미리보기 https://parentright-korea.pages.dev)
+- 도메인: Cloudflare Registrar에서 2026-11-03 구매, 1년, 자동 갱신 $11.20/년
 - 언어: 영어(메인), 베트남어(/vi/), 한국어(/ko/)
 - 후원: https://ko-fi.com/intid85 (표시 이름 ParentRight Korea, PayPal 연결, USD, 최소 $5)
 
@@ -43,7 +44,7 @@
 4. 커밋·푸시 (GitHub Pages는 main 브랜치 루트에서 배포)
 
 `build.py` 맨 위 설정값:
-- `PREFIX` — GitHub Pages 하위 경로(`/parentright-korea`). 자체 도메인으로 옮기면 `""`.
+- `PREFIX` — 하위 경로. 자체 도메인 루트에서 서비스하므로 `""`.
 - `BASE` — 사이트 기준 주소 (canonical, sitemap에 사용).
 - `KOFI_URL` — 비워두면 후원 버튼이 사라짐.
 
@@ -64,9 +65,10 @@
 
 ## 남은 일
 
-- [ ] Cloudflare에서 도메인 구매 (후보: parentright.org / parentrightkorea.com / parentright.help)
-- [ ] Cloudflare Pages로 호스팅 이전 (이 저장소 연결, 빌드 명령 없음, 출력 디렉터리 루트)
-- [ ] 도메인 연결 후 `build.py`의 `PREFIX = ""`, `BASE = "https://새도메인"`으로 바꾸고 재빌드
+- [x] Cloudflare에서 도메인 구매 (parentright.org)
+- [x] Cloudflare Pages로 호스팅 이전 (이 저장소 연결, 빌드 명령 없음, 출력 디렉터리 루트)
+- [x] 도메인 연결 후 `build.py`의 `PREFIX = ""`, `BASE = "https://parentright.org"`으로 바꾸고 재빌드
+- [ ] GitHub Pages 끄기 (PREFIX를 비워서 github.io 주소에서는 링크가 깨짐)
 - [ ] Ko-fi 프로필 Website 주소를 새 도메인으로 변경
 - [ ] Google Search Console 등록, sitemap 제출
 - [ ] 베트남어판 원어민 검수

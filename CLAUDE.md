@@ -13,12 +13,8 @@ Read `docs/project-notes.md` first: it has the operating principles, legal resea
 
 ## How the site is built
 - Edit `build.py` only (pages are generated). Run `python3 build.py`, copy `site/*` (including `.nojekyll`) to the repo root, delete `site/`, commit.
-- Settings at the top of `build.py`: `PREFIX` (GitHub Pages subpath), `BASE` (canonical/sitemap URL), `KOFI_URL`.
+- Settings at the top of `build.py`: `PREFIX` (URL subpath, `""` at the domain root), `BASE` (canonical/sitemap URL), `KOFI_URL`.
 
-## Current task: move to Cloudflare
-1. Buy the domain with Cloudflare Registrar (owner logs in himself; confirm the domain name and total price with him before paying; he enters payment details himself).
-2. Cloudflare Pages: connect GitHub repo `intid85/parentright-korea`, production branch `main`, no build command, output directory `/`.
-3. Add the custom domain in Pages.
-4. In `build.py` set `PREFIX = ""` and `BASE = "https://<domain>"`, rebuild, push.
-5. Remind the owner to change the Website field on his Ko-fi profile to the new domain.
-6. Optionally keep GitHub Pages running or disable it once Cloudflare is live.
+## Hosting
+- Live at https://parentright.org on Cloudflare Pages (project `parentright-korea`, production branch `main`, no build command, output `/`). Every push to `main` deploys automatically.
+- Domain bought on Cloudflare Registrar 2026-11-03. Remaining follow-ups are in `docs/project-notes.md`.
