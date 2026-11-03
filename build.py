@@ -3,7 +3,7 @@ import os, textwrap
 
 PREFIX = "/parentright-korea"  # GitHub Pages subpath; set to "" when moving to a custom domain
 BASE = "https://intid85.github.io" + PREFIX
-KOFI_URL = ""  # e.g. "https://ko-fi.com/yourname" - support buttons appear only when set
+KOFI_URL = "https://ko-fi.com/intid85"  # e.g. "https://ko-fi.com/yourname" - support buttons appear only when set
 UPDATED = {"en": "Last reviewed: November 2026", "vi": "Cập nhật lần cuối: tháng 11/2026", "ko": "최종 검토: 2026년 11월"}
 
 CSS = """
