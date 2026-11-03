@@ -18,3 +18,5 @@ Read `docs/project-notes.md` first: it has the operating principles, legal resea
 ## Hosting
 - Live at https://parentright.org on Cloudflare Pages (project `parentright-korea`, production branch `main`, no build command, output `/`). Every push to `main` deploys automatically.
 - Domain bought on Cloudflare Registrar 2026-11-03. Remaining follow-ups are in `docs/project-notes.md`.
+- Guides (`/guides/`) come from `guides.py`; follow `docs/guide-writing-rules.md`. A scheduled task publishes one on the 1st and 15th of each month.
+- Never commit the Cloudflare Workers AI token; it lives in the `CLOUDFLARE_AI_TOKEN` user environment variable.
