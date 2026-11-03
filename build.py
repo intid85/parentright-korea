@@ -48,6 +48,10 @@ footer a{margin-right:14px}
 LANG_LINKS = {"en": "/", "vi": "/vi/", "tl": "/tl/", "ko": "/ko/"}
 LANG_NAMES = {"en": "English", "vi": "Tiếng Việt", "tl": "Tagalog", "ko": "한국어"}
 
+def clean(path):
+    # Cloudflare Pages redirects /x.html to /x, so canonical and sitemap URLs use the final form
+    return path[:-5] if path.endswith(".html") else path
+
 def page(lang, path, title, desc, body, nav):
     langs = "".join(f'<a href="{LANG_LINKS[l]}" class="{"on" if l==lang else ""}" hreflang="{l}">{LANG_NAMES[l]}</a>' for l in LANG_LINKS)
     alts = "".join(f'<link rel="alternate" hreflang="{l}" href="{BASE}{LANG_LINKS[l]}">' for l in LANG_LINKS)
@@ -56,7 +60,7 @@ def page(lang, path, title, desc, body, nav):
     return f"""<!doctype html>
 <html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title><meta name="description" content="{desc}">
-<link rel="canonical" href="{BASE}{path}">{alts}
+<link rel="canonical" href="{BASE}{clean(path)}">{alts}
 <meta property="og:title" content="{title}"><meta property="og:description" content="{desc}">
 <style>{CSS}</style></head><body>
 <header><div class="wrap top"><a class="brand" href="{LANG_LINKS[lang]}">Parent<span>Right</span> Korea</a>
@@ -516,7 +520,7 @@ for lang, path, fn, title, desc, body, nav in PAGES:
 with open("site/robots.txt", "w") as f:
     f.write(f"User-agent: *\nAllow: /\nSitemap: {BASE}/sitemap.xml\n")
 with open("site/sitemap.xml", "w") as f:
-    urls = "".join(f"<url><loc>{BASE}{p[1]}</loc></url>" for p in PAGES)
+    urls = "".join(f"<url><loc>{BASE}{clean(p[1])}</loc></url>" for p in PAGES)
     f.write(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>')
 with open("site/_headers", "w") as f:
     f.write("/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Frame-Options: DENY\n")
