@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://intid85.github.io/parentright-korea/sitemap.xml
