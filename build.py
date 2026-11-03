@@ -4,6 +4,7 @@ import os, textwrap
 PREFIX = ""  # site is served from the domain root (Cloudflare Pages)
 BASE = "https://parentright.org"
 KOFI_URL = "https://ko-fi.com/intid85"  # e.g. "https://ko-fi.com/yourname" - support buttons appear only when set
+CONTACT_EMAIL = "contact@parentright.org"  # forwarded by Cloudflare Email Routing; corrections notes appear only when set
 UPDATED = {"en": "Last reviewed: November 2026", "vi": "Cập nhật lần cuối: tháng 11/2026", "ko": "최종 검토: 2026년 11월"}
 
 CSS = """
@@ -105,7 +106,7 @@ EN_HOME = """
 
 <div class="card step"><div class="num">5</div><div><h3>Make the order work</h3>
 <p>A Korean judgment is easiest to enforce against money or property in Korea (wages, bank accounts, real estate). If he keeps ignoring court orders, Korea's <strong>Child Support Enforcement Agency</strong> (양육비이행관리원) can pursue sanctions, including asking the Justice Ministry to ban him from leaving Korea. Ask the agency whether it can take your case if you live abroad.</p>
-<p class="small">Korea, the Philippines and Vietnam are not, as far as we can find, members of the 2007 Hague Child Support Convention, so treaty enforcement between these countries is generally not available. Check the current status on the HCCH website.</p></div></div>
+<p class="small">The Philippines joined the 2007 Hague Child Support Convention in 2022, but Korea and Vietnam have not, so this treaty cannot be used to enforce support against a father in Korea. Check the current status on the <a href="https://www.hcch.net/en/instruments/conventions/status-table/?cid=131" rel="noopener">HCCH status table</a>.</p></div></div>
 
 <div class="card step"><div class="num">6</div><div><h3>Your child's Korean nationality</h3>
 <p>Under Article 3 of Korea's Nationality Act, a child acknowledged by a Korean father can acquire Korean nationality by reporting to the Minister of Justice, if the child is still a minor under Korean law and the father was Korean when the child was born.</p></div></div>
@@ -129,8 +130,13 @@ EN_HOME = """
 <h2>Legal sources</h2>
 <ul class="small"><li>Civil Act Art. 863 (suit for acknowledgment); Family Litigation Act Arts. 26, 29, 50, 67; Nationality Act Art. 3: <a href="https://www.law.go.kr" rel="noopener">law.go.kr</a> (English versions at <a href="https://elaw.klri.re.kr" rel="noopener">elaw.klri.re.kr</a>)</li>
 <li>Act on Securing and Supporting Child Support Payments, Art. 21-4 (travel ban requests)</li>
-<li>HCCH 2007 Child Support Convention status: <a href="https://www.hcch.net" rel="noopener">hcch.net</a></li></ul>
-<p class="small">This page is general information, not legal advice. Laws change; confirm with legal aid or a lawyer before acting.</p>
+<li>Supreme Court 2001Meu1353 (the right to acknowledgment cannot be waived): <a href="https://glaw.scourt.go.kr" rel="noopener">glaw.scourt.go.kr</a></li>
+<li>2014 Seoul Family Court Kopino ruling: <a href="https://www.etoday.co.kr/news/view/935897" rel="noopener">Etoday report (Korean)</a></li>
+<li>HCCH 2007 Child Support Convention status: <a href="https://www.hcch.net/en/instruments/conventions/status-table/?cid=131" rel="noopener">hcch.net</a></li>
+<li>Danuri Helpline hours and languages: <a href="https://www.mogef.go.kr/cc/dcc/cc_dcc_f001.do" rel="noopener">Ministry of Gender Equality and Family</a></li>
+<li>Korea Legal Aid eligibility (median income 125% or less, including foreign residents of Korea): <a href="https://www.klac.or.kr" rel="noopener">klac.or.kr</a></li></ul>
+<p class="small">Sources last checked November 2026. This page is general information, not legal advice. Laws change; confirm with legal aid or a lawyer before acting.</p>
+{{CORRECTIONS_EN}}
 """
 
 EN_PH = """
@@ -139,7 +145,7 @@ EN_PH = """
 <div class="note">Follow the <a href="/#steps">6 steps</a>. This page adds what is specific to the Philippines.</div>
 <h2>What has worked</h2>
 <ul><li>2014: Seoul Family Court recognized two children living in the Philippines as the sons of their Korean father.</li>
-<li>Later cases ordered fathers to pay monthly child support until adulthood, and in one case about 20 million won in past support.</li>
+<li>Later cases ordered fathers to pay monthly child support until adulthood. In one reported Seoul Family Court case, the amount was 300,000 won a month, based on living costs in the Philippines.</li>
 <li>Some fathers agreed to a settlement after the case was filed.</li></ul>
 <h2>Organizations that have helped Kopino families</h2>
 <ul><li><strong>We Love Kopino (WLK)</strong>, a Manila-based NGO that has helped mothers bring cases in Korean courts.</li>
@@ -178,7 +184,7 @@ EN_ABOUT = """
 <li>We do not refer cases to lawyers for money.</li></ul>
 {{SUPPORT_EN}}
 <h2>Privacy</h2><p>This site has no accounts and does not collect personal data. {{DONATION_PRIVACY}} The "Find help" questions run only inside your browser; answers are never sent or stored. If analytics or ads are added later, this page will be updated first.</p>
-<h2>Corrections</h2><p>If something is wrong or out of date, please tell us at <a href="mailto:contact@parentright.example">contact@parentright.example</a>. Please do not send us personal information about anyone.</p>
+{{CORRECTIONS_EN}}
 """
 
 EN_FIND = """
@@ -338,6 +344,7 @@ VI_HOME = """
 <h2 id="gioi-thieu">Giới thiệu và quyền riêng tư</h2>
 <p>Chúng tôi chỉ giải thích các con đường pháp lý chính thức. Chúng tôi không bao giờ đăng tên, ảnh hay thông tin của bất kỳ ai, không nhận bài đăng hay bình luận, không tư vấn pháp lý và không giới thiệu luật sư để lấy tiền. Trang này không thu thập dữ liệu cá nhân.</p>
 <p class="small">Đây là thông tin chung, không phải tư vấn pháp lý. Luật có thể thay đổi; hãy xác nhận với trợ giúp pháp lý hoặc luật sư.</p>
+{{CORRECTIONS_VI}}
 """
 
 # ---------------- KOREAN ----------------
@@ -361,8 +368,8 @@ KO_HOME = """
 <li>유전자 수검명령(제29조), 정당한 이유 없이 불응하면 1천만원 이하 과태료, 재차 불응 시 30일 범위 감치(제67조).</li>
 <li>엄마와 아이의 검체를 해외에서 채취해 법원이 지정한 국내 기관에 보낸 사례가 있습니다.</li>
 <li>인지청구권은 포기할 수 없습니다(대법원 2001므1353). 아버지 사망 시 사망을 안 날부터 2년 내 검사를 상대로 제기.</li></ul></div></div>
-<div class="card step"><div class="num">4</div><div><h3>양육비 청구</h3><p>장래 양육비와 과거 양육비를 함께 청구할 수 있습니다. 코피노 사건에서 월 30만~50만원, 과거 양육비 2천만원 지급을 명한 판결이 있습니다.</p></div></div>
-<div class="card step"><div class="num">5</div><div><h3>집행</h3><p>국내 급여·예금·부동산에 대한 강제집행이 가장 현실적입니다. 이행명령 불이행 시 양육비이행관리원(1644-6621)을 통해 출국금지 요청 등 제재가 가능합니다(양육비이행법 제21조의4). 해외 거주 신청인 접수 가능 여부는 관리원에 확인하세요. 한국·필리핀·베트남은 확인한 범위에서 2007년 헤이그 양육비협약 당사국이 아니어서 조약을 통한 집행은 기대하기 어렵습니다.</p></div></div>
+<div class="card step"><div class="num">4</div><div><h3>양육비 청구</h3><p>장래 양육비와 과거 양육비를 함께 청구할 수 있습니다. 코피노 사건에서 필리핀 물가 등을 고려해 성년까지 월 30만원 지급을 명한 서울가정법원 판결이 보도된 바 있습니다.</p></div></div>
+<div class="card step"><div class="num">5</div><div><h3>집행</h3><p>국내 급여·예금·부동산에 대한 강제집행이 가장 현실적입니다. 이행명령 불이행 시 양육비이행관리원(1644-6621)을 통해 출국금지 요청 등 제재가 가능합니다(양육비이행법 제21조의4). 해외 거주 신청인 접수 가능 여부는 관리원에 확인하세요. 필리핀은 2022년 2007년 헤이그 양육비협약에 가입했지만 한국과 베트남은 당사국이 아니어서, 한국에 있는 아버지를 상대로 이 협약을 통한 집행은 할 수 없습니다(<a href="https://www.hcch.net/en/instruments/conventions/status-table/?cid=131" rel="noopener">HCCH 가입 현황</a>).</p></div></div>
 <div class="card step"><div class="num">6</div><div><h3>아이의 한국 국적</h3><p>국적법 제3조: 한국인 아버지에게 인지된 아이가 민법상 미성년이고 출생 당시 아버지가 한국 국민이었다면 법무부장관에게 신고해 국적을 취득할 수 있습니다.</p></div></div>
 
 <h2 id="help">무료 지원</h2>
@@ -379,7 +386,8 @@ KO_HOME = """
 <li>게시판·댓글·업로드 기능이 없습니다.</li>
 <li>법률 자문을 하지 않으며, 대가를 받고 변호사를 소개하지 않습니다(변호사법 준수).</li>
 <li>개인정보를 수집하지 않습니다.</li></ul>
-<p class="small">일반 정보이며 법률 자문이 아닙니다. 법령은 바뀔 수 있으니 실행 전 법률구조공단이나 변호사에게 확인하세요. 근거 법령: <a href="https://www.law.go.kr" rel="noopener">국가법령정보센터</a></p>
+<p class="small">일반 정보이며 법률 자문이 아닙니다. 법령은 바뀔 수 있으니 실행 전 법률구조공단이나 변호사에게 확인하세요. 근거 법령: <a href="https://www.law.go.kr" rel="noopener">국가법령정보센터</a>. 2014년 코피노 판결: <a href="https://www.etoday.co.kr/news/view/935897" rel="noopener">이투데이 보도</a>. 다누리콜센터 언어: <a href="https://www.mogef.go.kr/cc/dcc/cc_dcc_f001.do" rel="noopener">성평등가족부</a>. 출처 확인: 2026년 11월.</p>
+{{CORRECTIONS_KO}}
 """
 
 
@@ -394,6 +402,16 @@ def support_block(lang):
     return (f'<h2>{t[0]}</h2><div class="card"><p>{t[1]}</p>'
             f'<p><a href="{KOFI_URL}" rel="noopener" target="_blank" style="display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:10px;text-decoration:none;font-weight:600">{t[2]} ☕</a></p></div>')
 
+def corrections_block(lang):
+    if not CONTACT_EMAIL:
+        return ""
+    t = {
+      "en": ("Found a mistake?", "If anything here is wrong or out of date, email us at", "Please do not send personal information about anyone. We cannot give advice on individual cases."),
+      "vi": ("Phát hiện thông tin sai?", "Nếu có thông tin sai hoặc đã cũ, hãy gửi email cho chúng tôi:", "Vui lòng không gửi thông tin cá nhân của bất kỳ ai. Chúng tôi không thể tư vấn cho từng trường hợp."),
+      "ko": ("잘못된 내용을 발견하셨나요?", "틀리거나 오래된 정보가 있으면 이메일로 알려 주세요:", "특정인의 개인정보는 보내지 마세요. 개별 사건 상담은 하지 않습니다."),
+    }[lang]
+    return f'<h2>{t[0]}</h2><p>{t[1]} <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a>. {t[2]}</p>'
+
 PAGES = [
     ("en", "/", "index.html", "Find Your Child's Korean Father Legally | ParentRight Korea", "How mothers abroad can prove paternity in a Korean court, claim child support from a Korean father, and secure Korean nationality for their child. Free help listed.", EN_HOME, EN_NAV),
     ("en", "/find-help.html", "find-help.html", "Where to Get Help in Korea: Child Support & Paternity | ParentRight Korea", "Answer 6 questions to see which Korean offices, legal aid and organizations can help you claim paternity and child support from a Korean father.", EN_FIND, EN_NAV),
@@ -407,7 +425,7 @@ PAGES = [
 os.makedirs("site/vi", exist_ok=True); os.makedirs("site/ko", exist_ok=True)
 for lang, path, fn, title, desc, body, nav in PAGES:
     with open(f"site/{fn}", "w", encoding="utf-8") as f:
-        body = body.replace('{{SUPPORT_EN}}', support_block('en')).replace('{{SUPPORT_VI}}', support_block('vi')).replace('{{SUPPORT_KO}}', support_block('ko')).replace('{{DONATION_PRIVACY}}', 'Donations are handled entirely by Ko-fi and PayPal; we never see card details.' if KOFI_URL else '')
+        body = body.replace('{{SUPPORT_EN}}', support_block('en')).replace('{{SUPPORT_VI}}', support_block('vi')).replace('{{SUPPORT_KO}}', support_block('ko')).replace('{{CORRECTIONS_EN}}', corrections_block('en')).replace('{{CORRECTIONS_VI}}', corrections_block('vi')).replace('{{CORRECTIONS_KO}}', corrections_block('ko')).replace('{{DONATION_PRIVACY}}', 'Donations are handled entirely by Ko-fi and PayPal; we never see card details.' if KOFI_URL else '')
         html = page(lang, path, title, desc, body, nav).replace('href="/', f'href="{PREFIX}/')
         f.write(html)
 
