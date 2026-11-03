@@ -69,7 +69,7 @@
 - [x] Cloudflare Pages로 호스팅 이전 (이 저장소 연결, 빌드 명령 없음, 출력 디렉터리 루트)
 - [x] 도메인 연결 후 `build.py`의 `PREFIX = ""`, `BASE = "https://parentright.org"`으로 바꾸고 재빌드
 - [x] GitHub Pages 끄기 (2026-11-03)
-- [ ] Ko-fi 프로필 Website 주소를 새 도메인으로 변경
+- [x] Ko-fi 프로필 Website 주소를 새 도메인으로 변경
 - [ ] Google Search Console 등록, sitemap 제출
 - [ ] 베트남어판 원어민 검수
 - [ ] 번역 제휴처 확정 후 "Coming soon" 교체
