@@ -30,4 +30,4 @@ Rules for every guide in `guides.py`, whether written by hand or by the schedule
 3. Run `python build.py`, copy `site/*` (including `.nojekyll`) to the repo root, delete `site/`.
 4. Check `guides/<slug>.html` exists and contains no `{{`.
 5. Commit on `main` with a message ending in the Co-Authored-By line, push to `origin main`. Cloudflare Pages deploys automatically.
-6. Wait about a minute and confirm `https://parentright.org/guides/<slug>.html` returns 200.
+6. Wait about a minute and confirm `https://parentright.org/guides/<slug>` returns 200 (Cloudflare serves pages without `.html`).
