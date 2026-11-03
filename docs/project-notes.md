@@ -72,7 +72,7 @@
 - [x] 도메인 연결 후 `build.py`의 `PREFIX = ""`, `BASE = "https://parentright.org"`으로 바꾸고 재빌드
 - [x] GitHub Pages 끄기 (2026-11-03)
 - [x] Ko-fi 프로필 Website 주소를 새 도메인으로 변경
-- [ ] Google Search Console 등록, sitemap 제출
+- [x] Google Search Console 등록(도메인 속성, DNS TXT 인증), sitemap 제출 (2026-11-03). Cloudflare DNS의 google-site-verification TXT는 지우지 말 것
 - [ ] 베트남어판 원어민 검수
 - [ ] 타갈로그어판(/tl/) 원어민 검수 (2026-11-03 검수 없이 게시하기로 결정)
 - [ ] 번역 제휴처 확정 후 "Coming soon" 교체
