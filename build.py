@@ -5,7 +5,7 @@ PREFIX = ""  # site is served from the domain root (Cloudflare Pages)
 BASE = "https://parentright.org"
 KOFI_URL = "https://ko-fi.com/intid85"  # e.g. "https://ko-fi.com/yourname" - support buttons appear only when set
 CONTACT_EMAIL = "contact@parentright.org"  # forwarded by Cloudflare Email Routing; corrections notes appear only when set
-UPDATED = {"en": "Last reviewed: November 2026", "vi": "Cập nhật lần cuối: tháng 11/2026", "ko": "최종 검토: 2026년 11월"}
+UPDATED = {"en": "Last reviewed: November 2026", "vi": "Cập nhật lần cuối: tháng 11/2026", "tl": "Huling sinuri: Nobyembre 2026", "ko": "최종 검토: 2026년 11월"}
 
 CSS = """
 :root{--bg:#f7f8f6;--card:#fff;--ink:#1d2b2a;--muted:#5b6b69;--accent:#0f6b63;--accent-soft:#e3f0ee;--warn:#8a4b0f;--warn-soft:#fbf0e3;--line:#dde5e3}
@@ -41,8 +41,8 @@ footer{border-top:1px solid var(--line);margin-top:48px;padding:24px 0 40px;font
 footer a{margin-right:14px}
 """
 
-LANG_LINKS = {"en": "/", "vi": "/vi/", "ko": "/ko/"}
-LANG_NAMES = {"en": "English", "vi": "Tiếng Việt", "ko": "한국어"}
+LANG_LINKS = {"en": "/", "vi": "/vi/", "tl": "/tl/", "ko": "/ko/"}
+LANG_NAMES = {"en": "English", "vi": "Tiếng Việt", "tl": "Tagalog", "ko": "한국어"}
 
 def page(lang, path, title, desc, body, nav):
     langs = "".join(f'<a href="{LANG_LINKS[l]}" class="{"on" if l==lang else ""}" hreflang="{l}">{LANG_NAMES[l]}</a>' for l in LANG_LINKS)
@@ -64,6 +64,7 @@ def page(lang, path, title, desc, body, nav):
 FOOTER = {
 "en": '<p><a href="/find-help.html">Find help</a><a href="/about.html">About &amp; privacy</a><a href="/philippines.html">Philippines</a><a href="/vietnam.html">Vietnam</a></p><p>ParentRight Korea is an independent information guide. It is not a law firm, does not give legal advice, does not refer cases to lawyers for a fee, and never publishes information about any individual.</p>',
 "vi": '<p>ParentRight Korea là trang hướng dẫn thông tin độc lập. Chúng tôi không phải công ty luật, không tư vấn pháp lý, không giới thiệu luật sư để lấy phí và không bao giờ đăng thông tin về bất kỳ cá nhân nào.</p>',
+"tl": '<p>Ang ParentRight Korea ay isang independiyenteng gabay na pang-impormasyon. Hindi ito law firm, hindi nagbibigay ng legal na payo, hindi nagre-refer ng kaso sa abogado kapalit ng bayad, at hindi kailanman nagpo-post ng impormasyon tungkol sa sinumang tao.</p>',
 "ko": '<p>ParentRight Korea는 독립 정보 안내 사이트입니다. 법률사무소가 아니며 법률 자문을 하지 않고, 대가를 받고 변호사를 소개하지 않으며, 특정 개인에 관한 정보를 절대 게시하지 않습니다.</p>',
 }
 
@@ -142,7 +143,7 @@ EN_HOME = """
 EN_PH = """
 <section class="hero"><h1>Philippines: help for mothers of Kopino children</h1>
 <p>Children of Filipino mothers and Korean fathers (often called Kopino) have won paternity and child-support cases in Korean courts.</p></section>
-<div class="note">Follow the <a href="/#steps">6 steps</a>. This page adds what is specific to the Philippines.</div>
+<div class="note">Follow the <a href="/#steps">6 steps</a>. This page adds what is specific to the Philippines. A Tagalog version of this guide is <a href="/tl/">here</a>.</div>
 <h2>What has worked</h2>
 <ul><li>2014: Seoul Family Court recognized two children living in the Philippines as the sons of their Korean father.</li>
 <li>Later cases ordered fathers to pay monthly child support until adulthood. In one reported Seoul Family Court case, the amount was 300,000 won a month, based on living costs in the Philippines.</li>
@@ -347,6 +348,66 @@ VI_HOME = """
 {{CORRECTIONS_VI}}
 """
 
+# ---------------- TAGALOG ----------------
+TL_NAV = [("#mga-hakbang", "Mga hakbang"), ("#tulong", "Libreng tulong"), ("#tungkol", "Tungkol sa amin")]
+TL_HOME = """
+<section class="hero"><h1>Koreano ang ama ng anak mo at tumigil na siyang sumuporta? Ito ang legal na paraan.</h1>
+<p>Sunud-sunod na gabay para sa mga ina sa Pilipinas: pagpapatunay ng pagiging ama sa korte ng Korea, paghingi ng sustento para sa bata, at ang karapatan ng anak mo sa Korean citizenship.</p></section>
+
+<div class="note"><strong>May tunay kang karapatan.</strong> Noong 2014, kinilala ng Seoul Family Court ang dalawang batang nakatira sa Pilipinas bilang mga anak ng kanilang Koreanong ama. Sa mga sumunod na kaso, inutusan ng korte ang mga ama na magbayad ng buwanang sustento at ng sustento para sa mga nakaraang taon.</div>
+
+<div class="warn"><strong>Huwag i-post online ang pangalan o litrato niya.</strong> Sa Korea, puwedeng maging krimen (defamation) ang pag-post ng totoong impormasyon kung sinisira nito ang reputasyon ng tao, at puwedeng labag sa privacy law ang pag-post ng personal na datos. Puwede rin itong magbigay-babala sa kanya, magtago siya ng ari-arian, at humina ang kaso mo. Itago nang pribado ang ebidensya at gamitin ito sa korte.</div>
+
+<h2 id="mga-hakbang">Ang 6 na hakbang</h2>
+<div class="card step"><div class="num">1</div><div><h3>Ipunin at ingatan ang ebidensya</h3>
+<ul><li>Buong pangalan niya (sa Korean letters kung mayroon), petsa ng kapanganakan, at mga detalye ng ID o pasaporte na ibinigay niya sa iyo</li>
+<li>Mga numero ng telepono, KakaoTalk, LINE, Facebook o Instagram, at kung kailan tumigil ang mga ito</li>
+<li>Mga mensahe, litrato ninyong magkasama, petsa ng mga biyahe, at mga padala niyang pera</li>
+<li>Mga rekord ng pagbubuntis at ospital, lalo na kung kasama mo siya</li>
+<li>PSA birth certificate ng anak mo</li></ul>
+<p class="small">I-save sa dalawang lugar (telepono at cloud o USB).</p></div></div>
+
+<div class="card step"><div class="num">2</div><div><h3>Subukan munang hilingin na kusa niyang kilalanin ang bata</h3>
+<p>Kung makakausap mo pa siya, puwede niyang kusang kilalanin ang bata (voluntary acknowledgment, 임의인지) sa isang lokal na tanggapan sa Korea o sa Korean Embassy. Puwedeng magpa-DNA test muna kung pareho kayong pumayag. Ito ang pinakamabilis at pinakamurang paraan.</p></div></div>
+
+<div class="card step"><div class="num">3</div><div><h3>Kung tumanggi siya: kaso para sa pagkilala sa Family Court ng Korea</h3>
+<p>Ayon sa Article 863 ng Civil Act ng Korea, puwedeng magsampa ng kaso ang bata o ang legal na kinatawan niya (karaniwan ang ina) laban sa ama para kilalanin ang bata (인지청구의 소). Puwede mo itong gawin kahit nasa labas ka ng Korea.</p>
+<ul><li>Isinasampa ang kaso sa family court ng lugar kung saan nakatira ang ama sa Korea.</li>
+<li>Karaniwang dumadaan muna ito sa mediation.</li>
+<li>Kung itinatanggi niya na siya ang ama, puwedeng mag-utos ang korte ng DNA test. Kung tumanggi siya nang walang makatwirang dahilan, puwede siyang multahan ng hanggang 10 milyong won, at kung patuloy pa rin siyang tumanggi, puwede siyang ikulong nang hanggang 30 araw.</li>
+<li>Sa ilang kaso, puwedeng kunin sa Pilipinas ang DNA sample mo at ng anak mo at ipadala sa laboratoryong itinalaga ng korte sa Korea.</li>
+<li>Hindi puwedeng isuko ang karapatan ng bata na makilala. Kung namatay na ang ama, puwede pa ring magsampa ng kaso, pero sa loob lamang ng 2 taon mula nang malaman mo ang pagkamatay niya.</li></ul></div></div>
+
+<div class="card step"><div class="num">4</div><div><h3>Humingi ng sustento</h3>
+<p>Puwede kang humingi ng buwanang sustento hanggang tumanda ang bata, at ng sustento para sa mga nakaraang taon, kadalasan sa iisang kaso.</p></div></div>
+
+<div class="card step"><div class="num">5</div><div><h3>Ipatupad ang utos ng korte</h3>
+<p>Pinakamadaling ipatupad ang hatol ng korte ng Korea laban sa sahod, bank account o ari-arian niya sa Korea. Kung patuloy niyang binabalewala ang utos ng korte, puwedeng magpataw ng parusa ang <strong>Child Support Enforcement Agency</strong> ng Korea (양육비이행관리원, 1644-6621), kasama ang paghiling na pagbawalan siyang umalis ng Korea. Itanong sa ahensya kung matatanggap nila ang kaso mo kahit nakatira ka sa labas ng Korea.</p></div></div>
+
+<div class="card step"><div class="num">6</div><div><h3>Korean citizenship ng anak mo</h3>
+<p>Ayon sa Article 3 ng Nationality Act ng Korea, ang batang kinilala ng Koreanong ama ay puwedeng magkaroon ng Korean citizenship sa pamamagitan ng pag-uulat sa Minister of Justice, kung menor de edad pa ang bata ayon sa batas ng Korea at Koreano ang ama noong ipinanganak ang bata.</p></div></div>
+
+<h2 id="tulong">Libreng tulong</h2>
+<div class="grid">
+<div class="card"><a href="https://www.liveinkorea.kr" rel="noopener">Danuri Helpline 1577-1366</a><p class="small">24/7, may Tagalog. Para sa mga migrante at multicultural na pamilya sa Korea; may libreng konsultasyon sa abogado kapag may appointment.</p></div>
+<div class="card"><a href="https://www.klac.or.kr" rel="noopener">Korea Legal Aid Corporation (132)</a><p class="small">Libreng legal na payo at representasyon sa korte para sa may mababang kita, kasama ang mga dayuhang nakatira sa Korea.</p></div>
+<div class="card"><a href="https://www.childsupport.or.kr" rel="noopener">Child Support Enforcement Agency</a><p class="small">Ahensya ng gobyerno ng Korea, 1644-6621.</p></div>
+<div class="card"><a href="https://overseas.mofa.go.kr/ph-en/index.do" rel="noopener">Korean Embassy sa Pilipinas (consular section)</a><p class="small">Para sa mga tanong tungkol sa papeles ng pagkilala at citizenship.</p></div>
+<div class="card"><strong>We Love Kopino (WLK) at Kopino Children Association</strong><p class="small">Mga grupong tumulong na sa mga inang Pilipina sa mga kaso sa korte ng Korea. Kontakin lamang sila sa kanilang mga opisyal na page. Hindi kami konektado o binabayaran ng mga ito.</p></div>
+</div>
+
+<h2>Protektahan ang sarili</h2>
+<ul><li>Huwag magbayad nang maaga sa sinumang nangangakong "hahanapin ang ama."</li>
+<li>Huwag ipadala ang mga dokumento ng anak mo sa taong online mo lang nakilala.</li>
+<li>Kung pinagbabantaan ka, magsumbong sa pulis at itago ang mga mensahe.</li></ul>
+
+{{SUPPORT_TL}}
+<h2 id="tungkol">Tungkol sa amin at privacy</h2>
+<p>Ipinapaliwanag lamang namin ang mga opisyal na legal na paraan. Hindi kami kailanman nagpo-post ng pangalan, litrato o impormasyon ng sinuman, hindi tumatanggap ng post o comment, hindi nagbibigay ng legal na payo, at hindi nagre-refer ng abogado kapalit ng pera. Hindi nangongolekta ng personal na datos ang site na ito.</p>
+<p class="small">Pangkalahatang impormasyon ito, hindi legal na payo. Puwedeng magbago ang batas; kumpirmahin muna sa legal aid o sa abogado bago kumilos.</p>
+{{CORRECTIONS_TL}}
+"""
+
 # ---------------- KOREAN ----------------
 KO_NAV = [("#steps", "절차"), ("#help", "무료 지원"), ("#about", "운영 원칙")]
 KO_HOME = """
@@ -397,6 +458,7 @@ def support_block(lang):
     t = {
       "en": ("Support this free guide", "ParentRight Korea is independent and free. Donations keep the guide translated and up to date. Supporters do not get any legal service or priority, and donating is never required to use this site.", "Support on Ko-fi"),
       "vi": ("Ủng hộ trang hướng dẫn miễn phí này", "Trang này độc lập và miễn phí. Tiền ủng hộ giúp duy trì bản dịch và cập nhật thông tin. Bạn không cần ủng hộ để sử dụng trang.", "Ủng hộ qua Ko-fi"),
+      "tl": ("Suportahan ang libreng gabay na ito", "Independiyente at libre ang ParentRight Korea. Ginagamit ang donasyon para manatiling naisasalin at napapanahon ang gabay. Hindi kailangang mag-donate para magamit ang site, at walang legal na serbisyo o prayoridad na kapalit ang donasyon.", "Suportahan sa Ko-fi"),
       "ko": ("이 무료 안내를 후원해 주세요", "ParentRight Korea는 독립적으로 운영되는 무료 사이트입니다. 후원금은 번역과 정보 업데이트에 쓰이며, 후원과 관계없이 누구나 모든 내용을 이용할 수 있습니다.", "Ko-fi로 후원하기"),
     }[lang]
     return (f'<h2>{t[0]}</h2><div class="card"><p>{t[1]}</p>'
@@ -408,6 +470,7 @@ def corrections_block(lang):
     t = {
       "en": ("Found a mistake?", "If anything here is wrong or out of date, email us at", "Please do not send personal information about anyone. We cannot give advice on individual cases."),
       "vi": ("Phát hiện thông tin sai?", "Nếu có thông tin sai hoặc đã cũ, hãy gửi email cho chúng tôi:", "Vui lòng không gửi thông tin cá nhân của bất kỳ ai. Chúng tôi không thể tư vấn cho từng trường hợp."),
+      "tl": ("May nakita kang mali?", "Kung may mali o luma nang impormasyon dito, mag-email sa amin sa", "Huwag magpadala ng personal na impormasyon tungkol sa sinuman. Hindi kami makapagbibigay ng payo sa bawat kaso."),
       "ko": ("잘못된 내용을 발견하셨나요?", "틀리거나 오래된 정보가 있으면 이메일로 알려 주세요:", "특정인의 개인정보는 보내지 마세요. 개별 사건 상담은 하지 않습니다."),
     }[lang]
     return f'<h2>{t[0]}</h2><p>{t[1]} <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a>. {t[2]}</p>'
@@ -419,13 +482,14 @@ PAGES = [
     ("en", "/vietnam.html", "vietnam.html", "Vietnamese Mothers: Korean Father Child Support | ParentRight Korea", "Vietnamese mothers whose child's Korean father disappeared: legal steps in Korea, free Vietnamese-language help, documents.", EN_VN, EN_NAV),
     ("en", "/about.html", "about.html", "About & Privacy | ParentRight Korea", "What ParentRight Korea does and never does: no personal information about anyone, no legal advice, no paid referrals.", EN_ABOUT, EN_NAV),
     ("vi", "/vi/", "vi/index.html", "Tìm bố người Hàn của con một cách hợp pháp | ParentRight Korea", "Hướng dẫn cho mẹ Việt Nam: xác nhận cha con tại tòa án Hàn Quốc, yêu cầu tiền cấp dưỡng và quốc tịch Hàn Quốc cho con. Hỗ trợ miễn phí bằng tiếng Việt.", VI_HOME, VI_NAV),
+    ("tl", "/tl/", "tl/index.html", "Paano Legal na Hanapin ang Koreanong Ama ng Anak Mo | ParentRight Korea", "Gabay para sa mga inang Pilipina: pagkilala sa ama sa korte ng Korea, sustento para sa bata, at Korean citizenship. May listahan ng libreng tulong.", TL_HOME, TL_NAV),
     ("ko", "/ko/", "ko/index.html", "한국인 아버지 인지청구·양육비 안내 | ParentRight Korea", "해외에서 한국인 아버지와 연락이 끊긴 아이를 위한 인지청구, 양육비 청구, 국적취득 절차와 무료 지원기관 안내.", KO_HOME, KO_NAV),
 ]
 
-os.makedirs("site/vi", exist_ok=True); os.makedirs("site/ko", exist_ok=True)
+os.makedirs("site/vi", exist_ok=True); os.makedirs("site/tl", exist_ok=True); os.makedirs("site/ko", exist_ok=True)
 for lang, path, fn, title, desc, body, nav in PAGES:
     with open(f"site/{fn}", "w", encoding="utf-8") as f:
-        body = body.replace('{{SUPPORT_EN}}', support_block('en')).replace('{{SUPPORT_VI}}', support_block('vi')).replace('{{SUPPORT_KO}}', support_block('ko')).replace('{{CORRECTIONS_EN}}', corrections_block('en')).replace('{{CORRECTIONS_VI}}', corrections_block('vi')).replace('{{CORRECTIONS_KO}}', corrections_block('ko')).replace('{{DONATION_PRIVACY}}', 'Donations are handled entirely by Ko-fi and PayPal; we never see card details.' if KOFI_URL else '')
+        body = body.replace('{{SUPPORT_EN}}', support_block('en')).replace('{{SUPPORT_VI}}', support_block('vi')).replace('{{SUPPORT_TL}}', support_block('tl')).replace('{{SUPPORT_KO}}', support_block('ko')).replace('{{CORRECTIONS_EN}}', corrections_block('en')).replace('{{CORRECTIONS_VI}}', corrections_block('vi')).replace('{{CORRECTIONS_TL}}', corrections_block('tl')).replace('{{CORRECTIONS_KO}}', corrections_block('ko')).replace('{{DONATION_PRIVACY}}', 'Donations are handled entirely by Ko-fi and PayPal; we never see card details.' if KOFI_URL else '')
         html = page(lang, path, title, desc, body, nav).replace('href="/', f'href="{PREFIX}/')
         f.write(html)
 
