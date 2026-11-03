@@ -74,5 +74,6 @@
 - [x] Ko-fi 프로필 Website 주소를 새 도메인으로 변경
 - [ ] Google Search Console 등록, sitemap 제출
 - [ ] 베트남어판 원어민 검수
+- [ ] 타갈로그어판(/tl/) 원어민 검수 (2026-11-03 검수 없이 게시하기로 결정)
 - [ ] 번역 제휴처 확정 후 "Coming soon" 교체
 - [ ] (나중에) Ko-fi 목표(Goal)·첫 게시물 작성
